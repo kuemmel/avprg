@@ -28,3 +28,8 @@ void MainWindow::initializeAudio(){
     audioPlayer.start();
 }
 
+
+void MainWindow::on_volumeSlider_valueChanged(int value)
+{
+    oscillatorSource.setAmplitude(value / 100.);
+}
