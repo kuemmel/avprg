@@ -12,6 +12,7 @@ public:
     virtual qint64 read(float** buffer, qint64 numFrames);
     virtual void start();
     virtual void stop();
+    void setAmplitude(float value);
 private:
     QAudioFormat audioFormat;
     Sinus sinus;

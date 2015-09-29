@@ -19,6 +19,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void on_volumeSlider_valueChanged(int value);
+
 private:
     void initializeAudio();
     Ui::MainWindow *ui;
