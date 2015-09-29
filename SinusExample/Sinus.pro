@@ -10,7 +10,7 @@ QT       += core gui widgets multimedia
 TARGET = Sinus
 TEMPLATE = app
 
-INCLUDEPATH += ../audioEngine
+INCLUDEPATH += ../audioengine
 SOURCES += main.cpp\
         mainwindow.cpp\
         oscillatorsource.cpp\
@@ -22,4 +22,4 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui
 
-include(../audioEngine/audioplayer.pri)
+include(../audioengine/audioplayer.pri)
