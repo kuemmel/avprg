@@ -14,12 +14,26 @@ INCLUDEPATH += ../audioengine
 SOURCES += main.cpp\
         mainwindow.cpp\
         oscillatorsource.cpp\
-    sinus.cpp
+    sinus.cpp \
+    noise.cpp \
+    rect.cpp \
+    tent.cpp \
+    sawtooth.cpp \
+    source.cpp \
+    note.cpp
 
 HEADERS  += mainwindow.h \
     oscillatorsource.h\
-    sinus.h
+    sinus.h \
+    source.h \
+    noise.h \
+    rect.h \
+    tent.h \
+    sawtooth.h \
+    note.h
 
 FORMS    += mainwindow.ui
+
+#QMAKE_CXXFLAGS +=  -std=c++11
 
 include(../audioengine/audioplayer.pri)

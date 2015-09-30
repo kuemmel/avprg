@@ -2,7 +2,7 @@
 #define OSCILLATORSOURCE_H
 
 #include "audiosource.h"
-#include "sinus.h"
+#include "source.h"
 
 class OscillatorSource: public AudioSource
 {
@@ -10,12 +10,15 @@ public:
     OscillatorSource();
     virtual const QAudioFormat& format() const;
     virtual qint64 read(float** buffer, qint64 numFrames);
+    virtual void setSource(Source& source);
     virtual void start();
     virtual void stop();
-    void setAmplitude(float value);
+    virtual void setVolume(float amplitude);
+    virtual void setFrequency(float freq);
+    virtual void setSampleRate(float sampleRate);
 private:
     QAudioFormat audioFormat;
-    Sinus sinus;
+    Source* currentSource;
 };
 
 #endif // OSCILLATORSOURCE_H

@@ -1,15 +1,13 @@
 #ifndef SINUS_H
 #define SINUS_H
 
-class Sinus{
+#include "source.h"
+
+class Sinus : public Source
+{
 public:
     Sinus();
-    ~Sinus();
     float getValue();
-    void setAmplitude(float amplitude);
-private:
-    int index;
-    float amplitude;
 };
 
 #endif

@@ -7,6 +7,10 @@
 #include "audioplayer.h"
 #include "oscillatorsource.h"
 
+#include "sinus.h"
+#include "noise.h"
+#include "rect.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -19,8 +23,26 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    typedef enum
+    {
+    	SINUS = 0,
+        NOISE = 1,
+        RECT = 2,
+        TENT = 3,
+        SAWT = 4
+    } Sources;
+
 private slots:
-    void on_volumeSlider_valueChanged(int value);
+    void on_VolumeControl_valueChanged(int value);
+    void on_SetSource_currentIndexChanged(int index);
+
+    void on_FreeAmplitude_sliderMoved(int position);
+
+    void on_checkBox_toggled(bool checked);
+
+    void on_pushButton_pressed();
+    void on_pushButton_released();
+    void on_NoteSelector_sliderMoved(int position);
 
 private:
     void initializeAudio();
