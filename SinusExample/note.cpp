@@ -175,6 +175,12 @@ std::string Note::getNoteName(int number)
     return notes[number].first;
 }
 
+/**
+ * @TODO divide and conquer, start in the middle and go in the right direction
+ * @brief Note::getNoteName
+ * @param freq
+ * @return
+ */
 std::string Note::getNoteName(float freq)
 {
     for(int i=0;i<=107;i++)
@@ -198,6 +204,14 @@ float Note::getNoteFrequency(int number)
 
     return notes[number].second;
 }
+
+/**
+ * @TODO find a way to divide and conquer: find first occurence of major note (i.e c0 or c0#) and add 12 to it
+ * or just calc it "C#2" -> 2*12*1 or something
+ * @brief Note::getNoteFrequency
+ * @param name
+ * @return
+ */
 
 float Note::getNoteFrequency(std::string name)
 {

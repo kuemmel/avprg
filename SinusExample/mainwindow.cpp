@@ -117,3 +117,44 @@ void MainWindow::on_NoteSelector_sliderMoved(int position)
     ui->CurrentNote->setText(QString::fromStdString(note.name));
     ui->FreeAmplitude->setValue((int)note.frequency);
 }
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+
+    int pressedKey = event->key();
+
+    switch (pressedKey)
+    {
+        case Qt::Key_0:
+            oscillatorSource.setFrequency(Note::getNoteFrequency("C4"));
+            break;
+        case Qt::Key_1:
+            oscillatorSource.setFrequency(Note::getNoteFrequency("D4"));
+            break;
+        case Qt::Key_2:
+            oscillatorSource.setFrequency(Note::getNoteFrequency("E4"));
+            break;
+        case Qt::Key_3:
+            oscillatorSource.setFrequency(Note::getNoteFrequency("F4"));
+            break;
+        case Qt::Key_4:
+            oscillatorSource.setFrequency(Note::getNoteFrequency("G4"));
+            break;
+        case Qt::Key_5:
+            oscillatorSource.setFrequency(Note::getNoteFrequency("A4"));
+            break;
+        case Qt::Key_6:
+            oscillatorSource.setFrequency(Note::getNoteFrequency("B4"));
+            break;
+        case Qt::Key_7:
+            oscillatorSource.setFrequency(Note::getNoteFrequency("C5"));
+            break;
+    }
+
+    audioPlayer.start();
+}
+
+void MainWindow::keyReleaseEvent(QKeyEvent *event)
+{
+    audioPlayer.stop();
+}

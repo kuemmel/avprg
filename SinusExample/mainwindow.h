@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QFile>
 #include <QAudioOutput>
+#include <QKeyEvent>
 #include "audioplayer.h"
 #include "oscillatorsource.h"
 
@@ -43,6 +44,9 @@ private slots:
     void on_pushButton_pressed();
     void on_pushButton_released();
     void on_NoteSelector_sliderMoved(int position);
+
+    void keyPressEvent(QKeyEvent *event);
+    void keyReleaseEvent(QKeyEvent *event);
 
 private:
     void initializeAudio();
