@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>595</width>
+    <width>814</width>
     <height>395</height>
    </rect>
   </property>
@@ -19,59 +19,53 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>571</width>
+      <width>781</width>
       <height>321</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="4" column="6" rowspan="7" alignment="Qt::AlignHCenter">
-      <widget class="QSlider" name="FreeAmplitude">
-       <property name="minimum">
-        <number>50</number>
+     <item row="7" column="2">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Decay s</string>
        </property>
-       <property name="maximum">
-        <number>10000</number>
+      </widget>
+     </item>
+     <item row="5" column="2">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Attack s</string>
        </property>
+      </widget>
+     </item>
+     <item row="7" column="4">
+      <widget class="QSlider" name="DecaySlider">
        <property name="value">
-        <number>200</number>
+        <number>20</number>
        </property>
        <property name="orientation">
-        <enum>Qt::Vertical</enum>
+        <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>
-     <item row="3" column="6">
-      <widget class="QLabel" name="CurrentNote">
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;C0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="0" rowspan="3" colspan="2" alignment="Qt::AlignHCenter">
-      <widget class="QCheckBox" name="checkBox">
-       <property name="text">
-        <string>Play Automatically</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0" rowspan="2">
-      <widget class="QDial" name="VolumeControl">
-       <property name="maximum">
-        <number>100</number>
-       </property>
+     <item row="9" column="4">
+      <widget class="QSlider" name="SustainSlider">
        <property name="value">
-        <number>50</number>
+        <number>80</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>
-     <item row="6" column="0" rowspan="3" colspan="2">
-      <widget class="QPushButton" name="pushButton">
+     <item row="11" column="2">
+      <widget class="QLabel" name="label_3">
        <property name="text">
-        <string>Play</string>
+        <string>Release s</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="0" colspan="3">
+     <item row="3" column="0" colspan="5">
       <widget class="QComboBox" name="SetSource">
        <item>
         <property name="text">
@@ -100,7 +94,51 @@
        </item>
       </widget>
      </item>
-     <item row="3" column="5">
+     <item row="9" column="0" rowspan="3" colspan="2" alignment="Qt::AlignHCenter">
+      <widget class="QCheckBox" name="checkBox">
+       <property name="text">
+        <string>Play Automatically</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0" rowspan="2" colspan="2">
+      <widget class="QPushButton" name="pushButton">
+       <property name="text">
+        <string>Play</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0" rowspan="2">
+      <widget class="QDial" name="VolumeControl">
+       <property name="maximum">
+        <number>100</number>
+       </property>
+       <property name="value">
+        <number>50</number>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="8">
+      <widget class="QLabel" name="CurrentNote">
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;C0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="7" rowspan="6" alignment="Qt::AlignHCenter">
+      <widget class="QSlider" name="NoteSelector">
+       <property name="maximum">
+        <number>107</number>
+       </property>
+       <property name="pageStep">
+        <number>1</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="7">
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QLCDNumber" name="CurrentFrequency"/>
@@ -114,16 +152,77 @@
        </item>
       </layout>
      </item>
-     <item row="4" column="5" rowspan="7" alignment="Qt::AlignHCenter">
-      <widget class="QSlider" name="NoteSelector">
-       <property name="maximum">
-        <number>107</number>
+     <item row="5" column="8" rowspan="6" alignment="Qt::AlignHCenter">
+      <widget class="QSlider" name="FreeAmplitude">
+       <property name="minimum">
+        <number>50</number>
        </property>
-       <property name="pageStep">
-        <number>1</number>
+       <property name="maximum">
+        <number>10000</number>
+       </property>
+       <property name="value">
+        <number>200</number>
        </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="4">
+      <widget class="QSlider" name="AttackSlider">
+       <property name="maximum">
+        <number>100</number>
+       </property>
+       <property name="value">
+        <number>50</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="4">
+      <widget class="QSlider" name="ReleaseSlider">
+       <property name="value">
+        <number>10</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="2">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Sustain value</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="3">
+      <widget class="QLCDNumber" name="AttackLCD">
+       <property name="value" stdset="0">
+        <double>0.500000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="3">
+      <widget class="QLCDNumber" name="DecayLCD">
+       <property name="value" stdset="0">
+        <double>0.200000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="3">
+      <widget class="QLCDNumber" name="SustainLCD">
+       <property name="value" stdset="0">
+        <double>0.800000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="3">
+      <widget class="QLCDNumber" name="ReleaseLCD">
+       <property name="value" stdset="0">
+        <double>0.200000000000000</double>
        </property>
       </widget>
      </item>
@@ -135,7 +234,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>595</width>
+     <width>814</width>
      <height>20</height>
     </rect>
    </property>

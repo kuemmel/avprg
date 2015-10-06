@@ -48,6 +48,14 @@ private slots:
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
 
+    void on_AttackSlider_valueChanged(int value);
+
+    void on_DecaySlider_valueChanged(int value);
+
+    void on_SustainSlider_valueChanged(int value);
+
+    void on_ReleaseSlider_valueChanged(int value);
+
 private:
     void initializeAudio();
     Ui::MainWindow *ui;

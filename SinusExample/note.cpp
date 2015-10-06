@@ -14,6 +14,7 @@
 
 /**
  * Just an unordered list of pairs, notes[index].first get's the name, .second get's the frequency of the note
+ * formular for frequencies: freq = 444.0 * pow(2.0,(index - 69.0)/12.0)
  **/
 std::pair<std::string,float> notes[108] =
     {

@@ -33,7 +33,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::initializeAudio(){
     audioPlayer.setAudioSource(&oscillatorSource);
-    //audioPlayer.start();
+    audioPlayer.start();
 }
 
 //im Bereich 0-99
@@ -96,18 +96,21 @@ void MainWindow::on_FreeAmplitude_sliderMoved(int position)
 
 void MainWindow::on_checkBox_toggled(bool checked)
 {
-    if(checked) audioPlayer.start();
-    else audioPlayer.stop();
+    if(checked) oscillatorSource.noteOn();//audioPlayer.start();
+    //else audioPlayer.stop();
+    else oscillatorSource.noteOff();
 }
 
 void MainWindow::on_pushButton_pressed()
 {
-    audioPlayer.start();
+    //audioPlayer.start();
+    oscillatorSource.noteOn();
 }
 
 void MainWindow::on_pushButton_released()
 {
-    audioPlayer.stop();
+    //audioPlayer.stop();
+    oscillatorSource.noteOff();
 }
 
 void MainWindow::on_NoteSelector_sliderMoved(int position)
@@ -151,10 +154,43 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             break;
     }
 
-    audioPlayer.start();
+    oscillatorSource.noteOn();
+    //audioPlayer.start();
+    //
+    //int volume = ui->VolumeControl->value();
+    //oscillatorSource.setVolume(volume*0.01);
 }
 
 void MainWindow::keyReleaseEvent(QKeyEvent *event)
 {
-    audioPlayer.stop();
+    oscillatorSource.noteOff();
+    //audioPlayer.stop();
+    //oscillatorSource.setVolume(0);
+}
+
+void MainWindow::on_AttackSlider_valueChanged(int value)
+{
+    oscillatorSource.setAttack(value*0.01);
+    ui->AttackLCD->display(value*0.01);
+}
+
+void MainWindow::on_DecaySlider_valueChanged(int value)
+{
+    oscillatorSource.setDecay(value*0.01);
+    ui->DecayLCD->display(value*0.01);
+
+}
+
+void MainWindow::on_SustainSlider_valueChanged(int value)
+{
+    oscillatorSource.setSustain(value*0.01);
+    ui->SustainLCD->display(value*0.01);
+
+}
+
+void MainWindow::on_ReleaseSlider_valueChanged(int value)
+{
+    oscillatorSource.setRelease(value*0.01);
+    ui->ReleaseLCD->display(value*0.01);
+
 }

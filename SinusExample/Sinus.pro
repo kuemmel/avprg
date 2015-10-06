@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     tent.cpp \
     sawtooth.cpp \
     source.cpp \
-    note.cpp
+    note.cpp \
+    envelope.cpp
 
 HEADERS  += mainwindow.h \
     oscillatorsource.h\
@@ -30,7 +31,8 @@ HEADERS  += mainwindow.h \
     rect.h \
     tent.h \
     sawtooth.h \
-    note.h
+    note.h \
+    envelope.h
 
 FORMS    += mainwindow.ui
 
