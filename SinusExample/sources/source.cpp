@@ -4,7 +4,7 @@ const float pi = 3.1415926f;
 
 float Source::getSinusValue()
 {
-    float value = sin(2*pi * (frequency/sampleRate)*index);
+    float value = sin(2*pi*(frequency/sampleRate)*index);
     index++;
     return value;
 }
@@ -19,6 +19,11 @@ void Source::setSampleRate(float sample)
     sampleRate = sample;
 }
 
+/**
+ * Set volume as a dB value
+ * @brief Source::setVolume
+ * @param volume
+ */
 void Source::setVolume(float volume)
 {
     amplitude = volume;

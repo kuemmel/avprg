@@ -8,9 +8,9 @@
 #include "audioplayer.h"
 #include "oscillatorsource.h"
 
-#include "sinus.h"
-#include "noise.h"
-#include "rect.h"
+#include "sources/sinus.h"
+#include "sources/noise.h"
+#include "sources/rect.h"
 
 namespace Ui {
 class MainWindow;

@@ -11,7 +11,7 @@
 class Source
 {
 public:
-    Source() : index(0),amplitude(0.5),frequency(200),sampleRate(44100)
+    Source() : index(0),amplitude(.5),frequency(200),sampleRate(44100)
     {
 
     }

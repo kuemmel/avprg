@@ -1,6 +1,7 @@
 #include "envelope.h"
+#include <math.h>
 
-Envelope::Envelope() : state(OFF),gain(0), releaseSeconds(0.2), decaySeconds(0.2),sustain(0.8),attackSeconds(0.5),sampleRate(44100)
+Envelope::Envelope() : state(OFF),gain(-100), releaseSeconds(0.2), decaySeconds(0.2),sustain(-20),attackSeconds(0.5),sampleRate(44100)
 {
 
 }
@@ -15,7 +16,7 @@ void Envelope::setState(State state)
     this->state = state;
     if(state == OFF)
     {
-        gain = 0;
+        gain = -100;
     } else if(state == ON)
     {
         gain = sustain;
@@ -24,30 +25,31 @@ void Envelope::setState(State state)
 
 float Envelope::process(float input)
 {
+
     if(state == RELEASE)
     {
-        gain -= 1/(sampleRate * releaseSeconds);
-        if(gain <=0)
+        gain -= 100/(sampleRate * releaseSeconds);
+        if(gain <=-100)
         {
             setState(OFF);
         }
     } else if (state == ATTACK)
     {
-        gain += 1/(sampleRate * attackSeconds);
-        if(gain >=1)
+        gain += 100/(sampleRate * attackSeconds);
+        if(gain >=0)
         {
             setState(DECAY);
         }
     } else if (state == DECAY)
     {
-        gain -=  (1-sustain)/(sampleRate * decaySeconds);
+        gain -=  (100-sustain)/(sampleRate * decaySeconds);
         if (gain <= sustain)
         {
             setState(ON);
         }
     }
-
-    return input*gain;
+    //convert to loagrithmic scale
+    return input*(pow(10,gain/20));
 }
 
 void Envelope::setGain(float gain)

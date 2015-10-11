@@ -1,6 +1,7 @@
 #include <math.h>
-#include <noise.h>
 #include <cstdlib>
+
+#include "sources/noise.h"
 
 Noise::Noise(void) : max(1.0),min(-1.0),precision(1000)
 {

@@ -14,23 +14,23 @@ INCLUDEPATH += ../audioengine
 SOURCES += main.cpp\
         mainwindow.cpp\
         oscillatorsource.cpp\
-    sinus.cpp \
-    noise.cpp \
-    rect.cpp \
-    tent.cpp \
-    sawtooth.cpp \
-    source.cpp \
+    sources/sinus.cpp \
+    sources/noise.cpp \
+    sources/rect.cpp \
+    sources/tent.cpp \
+    sources/sawtooth.cpp \
+    sources/source.cpp \
     note.cpp \
     envelope.cpp
 
 HEADERS  += mainwindow.h \
     oscillatorsource.h\
-    sinus.h \
-    source.h \
-    noise.h \
-    rect.h \
-    tent.h \
-    sawtooth.h \
+    sources/sinus.h \
+    sources/source.h \
+    sources/noise.h \
+    sources/rect.h \
+    sources/tent.h \
+    sources/sawtooth.h \
     note.h \
     envelope.h
 

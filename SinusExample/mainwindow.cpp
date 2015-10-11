@@ -8,11 +8,11 @@
 
 #include "note.h"
 
-#include "noise.h"
-#include "sinus.h"
-#include "rect.h"
-#include "tent.h"
-#include "sawtooth.h"
+#include "sources/noise.h"
+#include "sources/sinus.h"
+#include "sources/rect.h"
+#include "sources/tent.h"
+#include "sources/sawtooth.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -39,7 +39,8 @@ void MainWindow::initializeAudio(){
 //im Bereich 0-99
 void MainWindow::on_VolumeControl_valueChanged(int value)
 {
-    oscillatorSource.setVolume(value*0.01);
+    ui->VolumeLCD->display(value);
+    oscillatorSource.setVolume(value);
 }
 
 /**
@@ -183,8 +184,8 @@ void MainWindow::on_DecaySlider_valueChanged(int value)
 
 void MainWindow::on_SustainSlider_valueChanged(int value)
 {
-    oscillatorSource.setSustain(value*0.01);
-    ui->SustainLCD->display(value*0.01);
+    oscillatorSource.setSustain(value);
+    ui->SustainLCD->display(value);
 
 }
 

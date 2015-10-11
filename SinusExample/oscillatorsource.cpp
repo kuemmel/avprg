@@ -1,6 +1,7 @@
 #include "oscillatorsource.h"
 #include <iostream>
-#include "sinus.h"
+#include <math.h>
+#include "sources/sinus.h"
 
 OscillatorSource::OscillatorSource()
 {
@@ -28,8 +29,9 @@ const QAudioFormat& OscillatorSource::format() const{
     return audioFormat;
 }
 
-void OscillatorSource::setVolume(float amplitude){
-    currentSource->setVolume(amplitude);
+void OscillatorSource::setVolume(float decibel){
+    float gain = pow(10,decibel/20.f);
+    currentSource->setVolume(gain);
 }
 
 void OscillatorSource::setSampleRate(float sample){

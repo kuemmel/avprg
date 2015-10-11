@@ -2,7 +2,7 @@
 #define OSCILLATORSOURCE_H
 
 #include "audiosource.h"
-#include "source.h"
+#include "sources/source.h"
 #include "envelope.h"
 
 class OscillatorSource: public AudioSource
@@ -14,7 +14,7 @@ public:
     virtual void setSource(Source& source);
     virtual void start();
     virtual void stop();
-    virtual void setVolume(float amplitude);
+    virtual void setVolume(float decibel);
     virtual void setFrequency(float freq);
     virtual void setSampleRate(float sampleRate);
     virtual float getSample();
