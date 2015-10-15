@@ -1,6 +1,9 @@
 #include "envelope.h"
 #include <math.h>
-
+/**
+ * TODO process effizienter machen (Siehe github Projekt W3)
+ * @brief Envelope::Envelope
+ */
 Envelope::Envelope() : state(OFF),gain(-100), releaseSeconds(0.2), decaySeconds(0.2),sustain(-20),attackSeconds(0.5),sampleRate(44100)
 {
 
@@ -50,6 +53,18 @@ float Envelope::process(float input)
     }
     //convert to loagrithmic scale
     return input*(pow(10,gain/20));
+}
+
+
+/**
+ * Returns the state as an int value, which is bad design, but I don#t want to add State to the global scope or declare it a second time
+ *
+ * @brief Envelope::getState
+ * @return
+ */
+int Envelope::getState()
+{
+    return (int)state;
 }
 
 void Envelope::setGain(float gain)

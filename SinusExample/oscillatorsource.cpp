@@ -72,6 +72,18 @@ qint64 OscillatorSource::read(float** buffer, qint64 numFrames){
 }
 void OscillatorSource::stop(){}
 
+/**
+ * Returns true if a note is currently played, attack,decay and sustain count as on
+ * @brief OscillatorSource::isOn
+ * @return
+ */
+bool OscillatorSource::isOn()
+{
+    int state = envelope.getState();
+    if(state > 1) return true; // 0-> off, 1->release
+    else return false;
+}
+
  void OscillatorSource::setGain(float gain)
  {
     envelope.setGain(gain);

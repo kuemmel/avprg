@@ -9,6 +9,7 @@
 #include "oscillatorsource.h"
 
 #include "sources/sinus.h"
+#include "midicontrol.h"
 #include "sources/noise.h"
 #include "sources/rect.h"
 
@@ -49,18 +50,19 @@ private slots:
     void keyReleaseEvent(QKeyEvent *event);
 
     void on_AttackSlider_valueChanged(int value);
-
     void on_DecaySlider_valueChanged(int value);
-
     void on_SustainSlider_valueChanged(int value);
-
     void on_ReleaseSlider_valueChanged(int value);
+
+    void onMidiNoteOff(const int chan, const int note, const int vel);
+    void onMidiNoteOn(const int chan, const int note, const int vel);
 
 private:
     void initializeAudio();
     Ui::MainWindow *ui;
     OscillatorSource oscillatorSource;
     AudioPlayer audioPlayer;
+    MidiControl* midiControl;
 };
 
 #endif // MAINWINDOW_H

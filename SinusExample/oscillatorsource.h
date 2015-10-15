@@ -21,6 +21,8 @@ public:
     virtual void noteOn();
     virtual void noteOff();
 
+    virtual bool isOn();
+
     virtual void setGain(float gain);
     virtual void setRelease(float seconds);
     virtual void setDecay(float seconds);

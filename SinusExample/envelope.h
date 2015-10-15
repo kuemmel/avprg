@@ -4,7 +4,7 @@ class Envelope
 {
 public:
     Envelope();
-    enum State {OFF,ON,ATTACK,RELEASE,DECAY,SUSTAIN};
+    enum State {OFF,RELEASE,ON,ATTACK,DECAY,SUSTAIN};
     float process(float input);
     void setReleaseSeconds(float seconds);
     void setState(State state);
@@ -15,6 +15,8 @@ public:
     void setSustain(float sustain);
     void setAttack(float attackSeconds);
     void setSample(float sample);
+
+    int getState(void);
 
 
 private:

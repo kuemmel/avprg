@@ -6,6 +6,7 @@
 #include <QAudioFormat>
 #include <iostream>
 
+#include "midicontrol.h"
 #include "note.h"
 
 #include "sources/noise.h"
@@ -21,8 +22,13 @@ MainWindow::MainWindow(QWidget *parent)
 
 {
     initializeAudio();
-
     ui->setupUi(this);
+    MidiControl* mControl = new MidiControl(*(ui->MidiChooser),*(ui->DebugMessageLabel));
+    midiControl = mControl;
+
+    QObject::connect(&midiControl->midiInput, SIGNAL(midiNoteOn(const int, const int, const int)), this, SLOT(onMidiNoteOn(const int, const int, const int)));
+    QObject::connect(&midiControl->midiInput, SIGNAL(midiNoteOff(const int, const int, const int)), this, SLOT(onMidiNoteOff(const int, const int, const int)));
+
 }
 
 MainWindow::~MainWindow()
@@ -116,57 +122,52 @@ void MainWindow::on_pushButton_released()
 
 void MainWindow::on_NoteSelector_sliderMoved(int position)
 {
-    Note note(position);
-    oscillatorSource.setFrequency(note.frequency);
-    ui->CurrentNote->setText(QString::fromStdString(note.name));
-    ui->FreeAmplitude->setValue((int)note.frequency);
+    float noteFrequency = Note::getNoteFrequency(position);
+    oscillatorSource.setFrequency(noteFrequency);
+    ui->FreeAmplitude->setValue(noteFrequency);
+    ui->CurrentNote->setText(QString::fromStdString(Note::getNoteName(position)));
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
 
     int pressedKey = event->key();
-
-    switch (pressedKey)
+    if (!oscillatorSource.isOn())
     {
-        case Qt::Key_0:
-            oscillatorSource.setFrequency(Note::getNoteFrequency("C4"));
-            break;
-        case Qt::Key_1:
-            oscillatorSource.setFrequency(Note::getNoteFrequency("D4"));
-            break;
-        case Qt::Key_2:
-            oscillatorSource.setFrequency(Note::getNoteFrequency("E4"));
-            break;
-        case Qt::Key_3:
-            oscillatorSource.setFrequency(Note::getNoteFrequency("F4"));
-            break;
-        case Qt::Key_4:
-            oscillatorSource.setFrequency(Note::getNoteFrequency("G4"));
-            break;
-        case Qt::Key_5:
-            oscillatorSource.setFrequency(Note::getNoteFrequency("A4"));
-            break;
-        case Qt::Key_6:
-            oscillatorSource.setFrequency(Note::getNoteFrequency("B4"));
-            break;
-        case Qt::Key_7:
-            oscillatorSource.setFrequency(Note::getNoteFrequency("C5"));
-            break;
+        switch (pressedKey)
+        {
+            case Qt::Key_1:
+                oscillatorSource.setFrequency(Note::getNoteFrequency("C4"));
+                break;
+            case Qt::Key_2:
+                oscillatorSource.setFrequency(Note::getNoteFrequency("D4"));
+                break;
+            case Qt::Key_3:
+                oscillatorSource.setFrequency(Note::getNoteFrequency("E4"));
+                break;
+            case Qt::Key_4:
+                oscillatorSource.setFrequency(Note::getNoteFrequency("F4"));
+                break;
+            case Qt::Key_5:
+                oscillatorSource.setFrequency(Note::getNoteFrequency("G4"));
+                break;
+            case Qt::Key_6:
+                oscillatorSource.setFrequency(Note::getNoteFrequency("A4"));
+                break;
+            case Qt::Key_7:
+                oscillatorSource.setFrequency(Note::getNoteFrequency("B4"));
+                break;
+            case Qt::Key_8:
+                oscillatorSource.setFrequency(Note::getNoteFrequency("C5"));
+                break;
+        }
+        oscillatorSource.noteOn();
     }
-
-    oscillatorSource.noteOn();
-    //audioPlayer.start();
-    //
-    //int volume = ui->VolumeControl->value();
-    //oscillatorSource.setVolume(volume*0.01);
 }
 
 void MainWindow::keyReleaseEvent(QKeyEvent *event)
 {
     oscillatorSource.noteOff();
-    //audioPlayer.stop();
-    //oscillatorSource.setVolume(0);
 }
 
 void MainWindow::on_AttackSlider_valueChanged(int value)
@@ -193,5 +194,22 @@ void MainWindow::on_ReleaseSlider_valueChanged(int value)
 {
     oscillatorSource.setRelease(value*0.01);
     ui->ReleaseLCD->display(value*0.01);
-
 }
+
+
+void MainWindow::onMidiNoteOff(const int chan, const int note, const int vel)
+{
+    oscillatorSource.noteOff();
+    ui->DebugMessageLabel->setText(QString("note off: ch=%1 note=%2 vel=%3\n").arg(chan).arg(note).arg(vel));
+}
+
+void MainWindow::onMidiNoteOn(const int chan, const int note, const int vel)
+{
+    if (vel == 0){
+        onMidiNoteOff(chan, note, vel);
+    }
+    oscillatorSource.setFrequency(Note::getNoteFrequency(note));
+    oscillatorSource.noteOn();
+    ui->DebugMessageLabel->setText(QString("note on:  ch=%1 note=%2 vel=%3\n").arg(chan).arg(note).arg(vel));
+}
+

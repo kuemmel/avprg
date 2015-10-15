@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     sources/sawtooth.cpp \
     sources/source.cpp \
     note.cpp \
-    envelope.cpp
+    envelope.cpp \
+    midicontrol.cpp
 
 HEADERS  += mainwindow.h \
     oscillatorsource.h\
@@ -32,10 +33,12 @@ HEADERS  += mainwindow.h \
     sources/tent.h \
     sources/sawtooth.h \
     note.h \
-    envelope.h
+    envelope.h \
+    midicontrol.h
 
 FORMS    += mainwindow.ui
 
 #QMAKE_CXXFLAGS +=  -std=c++11
 
 include(../audioengine/audioplayer.pri)
+include(../drumstick/drumstick.pro)
