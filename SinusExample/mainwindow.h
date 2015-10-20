@@ -5,13 +5,8 @@
 #include <QFile>
 #include <QAudioOutput>
 #include <QKeyEvent>
-#include "audioplayer.h"
-#include "oscillatorsource.h"
 
-#include "sources/sinus.h"
 #include "midicontrol.h"
-#include "sources/noise.h"
-#include "sources/rect.h"
 
 namespace Ui {
 class MainWindow;
@@ -25,43 +20,25 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    typedef enum
-    {
-    	SINUS = 0,
-        NOISE = 1,
-        RECT = 2,
-        TENT = 3,
-        SAWT = 4
-    } Sources;
-
+/**
+ * These slots are also in the audiocontrol
+ **/
 private slots:
-    void on_VolumeControl_valueChanged(int value);
-    void on_SetSource_currentIndexChanged(int index);
+    void onMidiNoteOff(const int chan, const int note, const int vel);
+    void onMidiNoteOn(const int chan, const int note, const int vel);
 
+    void on_VolumeControl_valueChanged(int value);
     void on_FreeAmplitude_sliderMoved(int position);
 
-    void on_checkBox_toggled(bool checked);
-
-    void on_pushButton_pressed();
-    void on_pushButton_released();
     void on_NoteSelector_sliderMoved(int position);
-
-    void keyPressEvent(QKeyEvent *event);
-    void keyReleaseEvent(QKeyEvent *event);
 
     void on_AttackSlider_valueChanged(int value);
     void on_DecaySlider_valueChanged(int value);
     void on_SustainSlider_valueChanged(int value);
     void on_ReleaseSlider_valueChanged(int value);
 
-    void onMidiNoteOff(const int chan, const int note, const int vel);
-    void onMidiNoteOn(const int chan, const int note, const int vel);
-
 private:
-    void initializeAudio();
     Ui::MainWindow *ui;
-    OscillatorSource oscillatorSource;
-    AudioPlayer audioPlayer;
     MidiControl* midiControl;
 };
 

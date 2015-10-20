@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     sources/source.cpp \
     note.cpp \
     envelope.cpp \
-    midicontrol.cpp
+    midicontrol.cpp \
+    audiocontrol.cpp
 
 HEADERS  += mainwindow.h \
     oscillatorsource.h\
@@ -34,7 +35,8 @@ HEADERS  += mainwindow.h \
     sources/sawtooth.h \
     note.h \
     envelope.h \
-    midicontrol.h
+    midicontrol.h \
+    audiocontrol.h
 
 
 FORMS    += mainwindow.ui
