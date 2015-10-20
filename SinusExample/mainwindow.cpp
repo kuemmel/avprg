@@ -6,30 +6,28 @@
 #include <QAudioFormat>
 #include <iostream>
 
-#include "midicontrol.h"
-
+#include "audiocontrol.h"
+#include "note.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , audioPlayer(this)
 
 {
-    initializeAudio();
     ui->setupUi(this);
-    MidiControl* mControl = new MidiControl(*(ui->MidiChooser),*(ui->DebugMessageLabel));
-    midiControl = mControl;
+    AudioControl* aControl = new AudioControl(ui);
+    audioControl = aControl;
 
-    QObject::connect(&midiControl->midiInput, SIGNAL(midiNoteOn(const int, const int, const int)), this, SLOT(onMidiNoteOn(const int, const int, const int)));
-    QObject::connect(&midiControl->midiInput, SIGNAL(midiNoteOff(const int, const int, const int)), this, SLOT(onMidiNoteOff(const int, const int, const int)));
+    QObject::connect(&audioControl->midiInput, SIGNAL(midiNoteOn(const int, const int, const int)), this, SLOT(onMidiNoteOn(const int, const int, const int)));
+    QObject::connect(&audioControl->midiInput, SIGNAL(midiNoteOff(const int, const int, const int)), this, SLOT(onMidiNoteOff(const int, const int, const int)));
     //ui elements send multiple signals, one for altering the ui, one for conrolling audio
-    QObject::connect(&ui->VolumeControl, SIGNAL(on_VolumeControl_valueChanged(int)), this, SLOT(on_VolumeControl_valueChanged(int)));
-    QObject::connect(&ui->FreeAmplitude, SIGNAL(on_FreeAmplitude_sliderMoved(int)), this, SLOT(on_FreeAmplitude_sliderMoved(int)));
-    QObject::connect(&ui->AttackSelector, SIGNAL(on_NoteSelector_sliderMoved(int)), this, SLOT(on_NoteSelector_sliderMoved(int)));
-    QObject::connect(&ui->AttackSlider, SIGNAL(on_AttackSlider_valueChanged(int)), this, SLOT(on_AttackSlider_valueChanged(int)));
-    QObject::connect(&ui->DecaySlider, SIGNAL(on_DecaySlider_valueChanged(int)), this, SLOT(on_DecaySlider_valueChanged(int)));
-    QObject::connect(&ui->SustainSlider, SIGNAL(on_SustainSlider_valueChanged(int)), this, SLOT(on_SustainSlider_valueChanged(int)));
-    QObject::connect(&ui->ReleaseSlider, SIGNAL(on_ReleaseSlider_valueChanged(int)), this, SLOT(on_ReleaseSlider_valueChanged(int)));
+    QObject::connect(ui->VolumeControl, SIGNAL(on_VolumeControl_valueChanged(int)), this, SLOT(on_VolumeControl_valueChanged(int)));
+    QObject::connect(ui->FreeAmplitude, SIGNAL(on_FreeAmplitude_sliderMoved(int)), this, SLOT(on_FreeAmplitude_sliderMoved(int)));
+    QObject::connect(ui->NoteSelector, SIGNAL(on_NoteSelector_sliderMoved(int)), this, SLOT(on_NoteSelector_sliderMoved(int)));
+    QObject::connect(ui->AttackSlider, SIGNAL(on_AttackSlider_valueChanged(int)), this, SLOT(on_AttackSlider_valueChanged(int)));
+    QObject::connect(ui->DecaySlider, SIGNAL(on_DecaySlider_valueChanged(int)), this, SLOT(on_DecaySlider_valueChanged(int)));
+    QObject::connect(ui->SustainSlider, SIGNAL(on_SustainSlider_valueChanged(int)), this, SLOT(on_SustainSlider_valueChanged(int)));
+    QObject::connect(ui->ReleaseSlider, SIGNAL(on_ReleaseSlider_valueChanged(int)), this, SLOT(on_ReleaseSlider_valueChanged(int)));
 }
 MainWindow::~MainWindow()
 {
@@ -58,7 +56,7 @@ void MainWindow::on_FreeAmplitude_sliderMoved(int position)
 
 void MainWindow::on_NoteSelector_sliderMoved(int position)
 {
-    ui->FreeAmplitude->setValue(noteFrequency);
+    ui->FreeAmplitude->setValue(Note::getNoteFrequency(position));
     ui->CurrentNote->setText(QString::fromStdString(Note::getNoteName(position)));
 }
 

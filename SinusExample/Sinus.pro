@@ -22,7 +22,6 @@ SOURCES += main.cpp\
     sources/source.cpp \
     note.cpp \
     envelope.cpp \
-    midicontrol.cpp \
     audiocontrol.cpp
 
 HEADERS  += mainwindow.h \
@@ -35,7 +34,6 @@ HEADERS  += mainwindow.h \
     sources/sawtooth.h \
     note.h \
     envelope.h \
-    midicontrol.h \
     audiocontrol.h
 
 

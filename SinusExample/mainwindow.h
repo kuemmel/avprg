@@ -6,7 +6,7 @@
 #include <QAudioOutput>
 #include <QKeyEvent>
 
-#include "midicontrol.h"
+#include "audiocontrol.h"
 
 namespace Ui {
 class MainWindow;
@@ -39,7 +39,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    MidiControl* midiControl;
+    AudioControl* audioControl;
 };
 
 #endif // MAINWINDOW_H

@@ -4,9 +4,17 @@
 #include <QLabel>
 #include <QComboBox>
 #include <QObject>
+//#include <QMainWindow>
+#include "mainwindow.h"
 #include "midiinput.h"
 #include "audioplayer.h"
 #include "oscillatorsource.h"
+
+
+namespace Ui {
+class MainWindow;
+}
+
 
 class AudioControl : public QObject
 {
@@ -25,7 +33,7 @@ class AudioControl : public QObject
 
 public:
     AudioControl();
-    AudioControl(QComboBox& qtChooser,QLabel& label);
+    AudioControl(Ui::MainWindow* ui);
     ~AudioControl(){};
 
     void addQWidget(QComboBox& comboBox);
@@ -52,12 +60,10 @@ private slots:
     void on_ReleaseSlider_valueChanged(int value);
 private:
     void initializeAudio();
-    void initializeMidi();
+    void initializeMidi(Ui::MainWindow* ui);
     void prependMessage(QString message);
 
 private:
-    QComboBox* midiChooser;
-    QLabel* messageLabel;
     OscillatorSource oscillatorSource;
     AudioPlayer audioPlayer;
 };
